@@ -13,6 +13,9 @@ public interface ClassDao {
 	//删除课程
 	void delOneClass(Object object);
 	
-
+	//根据课程号添加学习此课程的学生
+	void addOneStudentByClassId(Object object,Object object2);
 	
+	//根据课程号删除学习此课程的学生
+	void depOneStudentByClassId(Object object);
 }	

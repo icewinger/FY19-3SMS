@@ -16,6 +16,7 @@ import com.neuedu.entity.Student;
 public class StudentDaoimpl implements StudentDao {
 	//Connection的成员变量
 	private Connection conn;
+	
 	public StudentDaoimpl(Connection conn) 
 	{
 		this.conn = conn;
@@ -55,9 +56,9 @@ public class StudentDaoimpl implements StudentDao {
 			int executeUpdate = pre.executeUpdate();
 			if(executeUpdate!=0)
 			{
-				System.out.println("添加成功");
+				System.out.println("修改成功");
 			}else
-				System.out.println("添加失败请重新输入");
+				System.out.println("输入有误，修改失败请重新输入");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -70,7 +71,7 @@ public class StudentDaoimpl implements StudentDao {
 		String sql = "delete  FROM student where stuId = ?";
 		try {
 			PreparedStatement prepareStatement = conn.prepareStatement(sql);
-			prepareStatement.setString(1, "stu11");
+			prepareStatement.setString(1, stuId);
 			int executeUpdate = prepareStatement.executeUpdate();
 			if(executeUpdate!=0)
 			{
@@ -82,7 +83,7 @@ public class StudentDaoimpl implements StudentDao {
 			e.printStackTrace();
 		}
 	}
-	
+	//查询全部学生信息
 	@Override
 	public List<Student> getAllStudent() {
 		String sql = "SELECT * FROM student";

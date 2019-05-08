@@ -42,9 +42,9 @@ public class ClassDaoimpl implements ClassDao {
 			int executeUpdate = ps.executeUpdate();
 			if(executeUpdate!=0)
 			{
-				System.out.println("添加成功");
+				System.out.println("修改成功");
 			}else
-				System.out.println("添加失败请重新输入");
+				System.out.println("修改失败请重新输入");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,6 +58,47 @@ public class ClassDaoimpl implements ClassDao {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setObject(1, object);
 			int executeUpdate = ps.executeUpdate();
+			if(executeUpdate!=0)
+			{
+				System.out.println("删除成功");
+			}else
+				System.out.println("删除失败请重新输入");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//根据课程号添加学习此课程的学生
+	@Override
+	public void addOneStudentByClassId(Object object, Object object2) {
+		String sql ="INSERT INTO stuandcourse\r\n" + 
+				"(sId,cId)\r\n" + 
+				"VALUE (?,?);"; 
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setObject(1, object);
+			ps.setObject(2, object2);
+			int executeUpdate = ps.executeUpdate();
+			if(executeUpdate!=0)
+			{
+				System.out.println("添加成功");
+			}else
+				System.out.println("添加失败请重新输入");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//根据课程号删除学习此课程的学生
+	@Override
+	public void depOneStudentByClassId(Object object) {
+		String sql = "DELETE FROM stuandcourse WHERE cId = ?;";
+		try {
+			PreparedStatement prepareStatement = conn.prepareStatement(sql);
+			prepareStatement.setObject(1, object);
+			int executeUpdate = prepareStatement.executeUpdate();
 			if(executeUpdate!=0)
 			{
 				System.out.println("删除成功");
